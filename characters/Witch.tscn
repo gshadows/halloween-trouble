@@ -1,5 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://models/Witch.glb" type="PackedScene" id=1]
+[ext_resource path="res://characters/Witch.gd" type="Script" id=2]
+[ext_resource path="res://config/default_env.tres" type="Environment" id=3]
 
 [node name="Witch" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Witch" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0 )
+
+[node name="WitchHat" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0 )
+
+[node name="WitchFoot" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )
+
+[node name="Camera" type="Camera" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 0.962218, 0.27228, 0, -0.27228, 0.962218, 0, 3.54012, 4.43092 )
+environment = ExtResource( 3 )

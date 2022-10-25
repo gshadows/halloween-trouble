@@ -1,3 +1,4 @@
+class_name BaseLevel
 extends Spatial
 
 signal quit

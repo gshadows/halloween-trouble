@@ -1,4 +1,4 @@
-extends "res://levels/base_level.gd"
+extends BaseLevel
 
 func _ready():
 	pass

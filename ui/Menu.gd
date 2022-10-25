@@ -59,9 +59,9 @@ func _on_FullScreenEnable_toggled(button_pressed):
 	Settings.save()
 
 
-func _on_MusicSlider_drag_ended(value_changed):
+func _on_MusicSlider_drag_ended(_value_changed):
 	Settings.save()
 
 
-func _on_SfxSlider_drag_ended(value_changed):
+func _on_SfxSlider_drag_ended(_value_changed):
 	Settings.save()
