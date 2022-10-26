@@ -1,3 +1,4 @@
+class_name Witch
 extends Spatial
 
 onready var cam := $Camera

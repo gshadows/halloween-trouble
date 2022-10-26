@@ -96,9 +96,20 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -111.0
 margin_top = 65.0
-margin_right = -13.0
+margin_right = 12.0
 margin_bottom = 89.0
 text = "Full Screen"
+
+[node name="DebugEnable" type="CheckBox" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 15.0
+margin_top = 65.0
+margin_right = 113.0
+margin_bottom = 89.0
+text = "Debug"
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -124,3 +135,4 @@ GitHub: https://gshadows.github.com
 [connection signal="drag_ended" from="SfxSlider" to="." method="_on_SfxSlider_drag_ended"]
 [connection signal="value_changed" from="SfxSlider" to="." method="_on_SfxSlider_value_changed"]
 [connection signal="toggled" from="FullScreenEnable" to="." method="_on_FullScreenEnable_toggled"]
+[connection signal="toggled" from="DebugEnable" to="." method="_on_DebugEnable_toggled"]

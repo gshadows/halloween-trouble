@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "BaseLevel",
 "language": "GDScript",
 "path": "res://levels/base_level.gd"
+}, {
+"base": "Spatial",
+"class": "Witch",
+"language": "GDScript",
+"path": "res://characters/Witch.gd"
 } ]
 _global_script_class_icons={
-"BaseLevel": ""
+"BaseLevel": "",
+"Witch": ""
 }
 
 [application]

@@ -10,6 +10,7 @@ func _ready():
 	$MusicEnable.pressed = Settings.music_enable
 	$MusicSlider.value = Settings.music_volume
 	$FullScreenEnable.pressed = Settings.full_screen
+	$DebugEnable.pressed = Settings.debug
 
 
 func _input(event):
@@ -64,4 +65,9 @@ func _on_MusicSlider_drag_ended(_value_changed):
 
 
 func _on_SfxSlider_drag_ended(_value_changed):
+	Settings.save()
+
+
+func _on_DebugEnable_toggled(button_pressed):
+	Settings.debug = button_pressed
 	Settings.save()

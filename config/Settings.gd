@@ -15,6 +15,8 @@ var music_enable := true
 
 var full_screen := false
 
+var debug := OS.is_debug_build()
+
 
 func _ready():
 	reload()
@@ -32,6 +34,8 @@ func save():
 
 	config.set_value("video", "full_screen", full_screen)
 
+	config.set_value("game", "debug", debug)
+
 	config.save(CFG_PATH)
 
 
@@ -48,6 +52,8 @@ func reload():
 	music_enable = config.get_value("audio", "music_enable", music_enable)
 
 	full_screen = config.get_value("video", "full_screen", full_screen)
+
+	debug = config.get_value("game", "debug", debug)
 
 
 func apply():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/level-01.gd" type="Script" id=1]
 [ext_resource path="res://models/Ground.glb" type="PackedScene" id=2]
 [ext_resource path="res://characters/Witch.tscn" type="PackedScene" id=3]
 [ext_resource path="res://models/BushGreen.glb" type="PackedScene" id=4]
 [ext_resource path="res://objects/StreetLamp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/Ghost.tscn" type="PackedScene" id=6]
 
 [node name="level-01" type="Spatial"]
 script = ExtResource( 1 )
@@ -98,3 +99,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24177, -0.0420277, 3.6396 )
 
 [node name="Witch" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.740083, 0, 5.8 )
+
+[node name="Ghost" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14023, 0, 5.52688 )
