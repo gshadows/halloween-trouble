@@ -3,6 +3,8 @@ extends Spatial
 
 onready var cam := $Camera
 onready var foot := $WitchFoot
+onready var hud := $HUD
+
 
 const WALK_SPEED_FRONT := 2.0
 const WALK_SPEED_BACK := 1.0
@@ -17,23 +19,35 @@ const FOOT_PERIOD := Vector2(1, 1)
 const CAM_MAX_DY := 1.0
 const CAM_SPEED_Y := 5.0
 
+const START_HEALTH = 100.0
+const EXPLOSION_RADIUS_SQUARE = 25.0
+const CANDY_HEALTH = 30.0
+
+
 var start_pos: Vector2
 var start_foot_pos: Vector2
 var start_cam_y: float
 var cam_dy := 0.0
-
 var is_pumpkin_fly := false
+
+var health := START_HEALTH
+var candies := 0
+var pumpkins := 0
 
 
 func _ready():
 	start_pos = Vector2(translation.x, translation.y)
 	start_foot_pos = Vector2(foot.translation.x, foot.translation.y)
 	start_cam_y = cam.translation.y
+	hud.set_health(health)
+	hud.set_pumpkins(pumpkins)
+	hud.set_candies(candies)
 
 
 func _process(delta):
-	_do_movement(delta)
-	_do_actions()
+	if health > 0:
+		_do_movement(delta)
+		_do_actions()
 
 
 func _do_movement(delta):
@@ -65,6 +79,42 @@ func _do_movement(delta):
 
 
 func _do_actions():
-	if Input.is_action_just_pressed("shoot") and not is_pumpkin_fly:
-		is_pumpkin_fly = true
-		# Instantiale pumpkin
+	if Input.is_action_just_pressed("shoot") and not is_pumpkin_fly and (pumpkins > 0):
+		shoot()
+	if Input.is_action_just_pressed("heal") and (candies > 0):
+		heal()
+
+
+func shoot():
+	is_pumpkin_fly = true
+	pumpkins -= 1
+	hud.set_pumpkins(pumpkins)
+	var pumpkin = PumpkinShot.new()
+	pumpkin.setup(self)
+	get_parent().add_child(pumpkin)
+
+
+func heal():
+	candies -= 1
+	hud.set_candies(pumpkins)
+	health += CANDY_HEALTH
+	hud.set_health(health)
+
+
+func pumpkin_exploded():
+	is_pumpkin_fly = false
+
+
+func _on_Area_area_entered(area):
+	var other = area.get_parent()
+	if other is PumpkinExplode:
+		var dist_sqr = (other.global_transform.origin - global_transform.origin).length_squared()
+		var damage = dist_sqr / EXPLOSION_RADIUS_SQUARE
+		print("Exlosion hit: dist_sqr ", dist_sqr)
+		take_damage(damage)
+		return
+
+
+func take_damage(damage: float):
+	health -= damage
+	hud.set_health(health)

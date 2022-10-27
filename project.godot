@@ -15,12 +15,24 @@ _global_script_classes=[ {
 "path": "res://levels/base_level.gd"
 }, {
 "base": "Spatial",
+"class": "PumpkinExplode",
+"language": "GDScript",
+"path": "res://characters/PumpkinExplode.gd"
+}, {
+"base": "Spatial",
+"class": "PumpkinShot",
+"language": "GDScript",
+"path": "res://characters/PumpkinShot.gd"
+}, {
+"base": "Spatial",
 "class": "Witch",
 "language": "GDScript",
 "path": "res://characters/Witch.gd"
 } ]
 _global_script_class_icons={
 "BaseLevel": "",
+"PumpkinExplode": "",
+"PumpkinShot": "",
 "Witch": ""
 }
 
@@ -87,6 +99,11 @@ run={
 shoot={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+heal={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

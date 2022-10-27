@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/icon.png" type="Texture" id=1]
+[ext_resource path="res://ui/HUD.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.807843, 0.0941176, 0, 1 )
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="HealthIcon" type="TextureRect" parent="."]
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 52.0
+margin_bottom = 46.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = 57.0
+margin_top = 12.0
+margin_right = 221.0
+margin_bottom = 40.0
+custom_styles/fg = SubResource( 1 )
+value = 50.0
+percent_visible = false
+
+[node name="PumpkinIcon" type="TextureRect" parent="."]
+margin_left = 261.0
+margin_top = 6.0
+margin_right = 301.0
+margin_bottom = 46.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="PumpkinCount" type="Label" parent="."]
+margin_left = 310.0
+margin_top = 6.0
+margin_right = 394.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 1, 0.513726, 0, 1 )
+text = "0"
+
+[node name="CandyIcon" type="TextureRect" parent="."]
+margin_left = 402.0
+margin_top = 6.0
+margin_right = 442.0
+margin_bottom = 46.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="CandyCount" type="Label" parent="."]
+margin_left = 454.0
+margin_top = 6.0
+margin_right = 538.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 0.294118, 1, 0, 1 )
+text = "0"

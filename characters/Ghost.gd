@@ -12,9 +12,13 @@ const WALK_SPEED := 1.0
 const ATTACK_ALTITUDE := 3.0
 const SIGHT_DISTANCE := 5.0
 const ATTACK_DISTANCE := 0.5
+const FALLBACK_SPEED := 3.0
 
 const FLY_PERIOD := 6.0
 const FLY_ALTITUDE := 5.0
+
+const ATTACK_DPS = 20.0 # Attack damage per second
+
 
 enum State { BORN, PAUSE, FOLLOW, ATTACK, FALLBACK, DEATH }
 var state: int
@@ -168,16 +172,19 @@ func _do_follow(delta: float):
 func _do_attack(delta: float):
 	translation.y = base_pos.y + ATTACK_ALTITUDE * sin(Time.get_ticks_msec() * 0.1) * delta
 	timer -= delta
+	witch.take_damage(ATTACK_DPS * delta)
 	if timer <= 0:
 		_change_state(State.FALLBACK)
 
 
 func _do_fallback(delta: float):
 	# TODO: Fallback animation.
+	translation.x += FALLBACK_SPEED * delta
+	translation.y = base_pos.y + sin(timer / FALLBACK_TIME * PI)
 	timer -= delta
 	if timer <= 0:
 		translation = Vector3(translation.x, base_pos.y, translation.z) # Restore normal Y.
-		_change_state(State.FOLLOW)
+		_change_state(State.PAUSE, State.FOLLOW)
 
 
 func _do_death(delta: float):
@@ -192,3 +199,7 @@ func _do_death(delta: float):
 	if timer <= 0:
 		get_parent().remove_child(self)
 		queue_free()
+
+
+func _on_Area_area_entered(area):
+	_change_state(State.PAUSE, State.DEATH)
