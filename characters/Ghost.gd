@@ -129,7 +129,6 @@ func _do_born(delta: float):
 	translation.y += size_y * speed
 	# Fade-in from invisible to half-transparent.
 	var alpha := 0.5 - timer / BORN_TIME * 0.5
-	print("Alpha: ", alpha, ", speed ", speed)
 	material.albedo_color.a = alpha
 	# Born timer.
 	timer -= delta

@@ -113,7 +113,9 @@ margin_top = 65.0
 margin_right = 113.0
 margin_bottom = 89.0
 focus_mode = 0
+custom_colors/font_color_disabled = Color( 0.603922, 0.356863, 0.215686, 1 )
 custom_colors/font_color = Color( 0.603922, 0.356863, 0.215686, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.411765, 0.25098, 1 )
 text = "Debug"
 
 [node name="Label" type="Label" parent="."]

@@ -25,7 +25,7 @@ const CAM_MAX_DY := 1.0
 const CAM_SPEED_Y := 5.0
 
 const START_HEALTH := 100.0
-const EXPLOSION_RADIUS_SQUARE := 25.0
+const EXPLOSION_DAMAGE := 25.0
 const CANDY_HEALTH := 30.0
 
 
@@ -42,18 +42,13 @@ var material_hat: SpatialMaterial
 var material_foot: SpatialMaterial
 
 var health := START_HEALTH
-var candies := 1
-var pumpkins := 1
+var candies := 0
+var pumpkins := 0
 
 
 func _ready():
 	if Settings.debug:
-		label3d = Label3D.new()
-		label3d.billboard = SpatialMaterial.BILLBOARD_ENABLED
-		label3d.translation.y = 2.1
-		label3d.modulate = Color.cyan
-		label3d.name = "_debug"
-		add_child(label3d)
+		_set_debug_mode()
 	Game.witch = self
 	start_pos = Vector2(translation.x, translation.y)
 	start_foot_pos = Vector2(foot.translation.x, foot.translation.y)
@@ -66,6 +61,18 @@ func _ready():
 	material_foot  = prepare_material($WitchFoot)
 
 
+func _set_debug_mode():
+	label3d = Label3D.new()
+	label3d.billboard = SpatialMaterial.BILLBOARD_ENABLED
+	label3d.translation.y = 2.1
+	label3d.modulate = Color.cyan
+	label3d.name = "_debug"
+	add_child(label3d)
+	health = 9999
+	candies = 9999
+	pumpkins = 9999
+
+
 func prepare_material(mi:MeshInstance) -> SpatialMaterial:
 	var material:SpatialMaterial = mi.mesh.surface_get_material(0)
 	material.albedo_color.a = 1
@@ -74,7 +81,6 @@ func prepare_material(mi:MeshInstance) -> SpatialMaterial:
 
 
 func update_alpha(alpha:float):
-	print("upd_a: ", alpha)
 	material_witch.albedo_color.a = alpha
 	material_hat  .albedo_color.a = alpha
 	material_foot .albedo_color.a = alpha
@@ -169,9 +175,8 @@ func pumpkin_exploded():
 
 func _on_Area_area_entered(area:Area):
 	if area is PumpkinExplode:
-		var dist_sqr = (area.global_transform.origin - global_transform.origin).length_squared()
-		var damage = dist_sqr / EXPLOSION_RADIUS_SQUARE
-		print("Exlosion hit: dist_sqr ", dist_sqr)
+		var dist = abs(area.global_transform.origin.x - global_transform.origin.x)
+		var damage = abs(1.0 - dist) * EXPLOSION_DAMAGE
 		take_damage(damage)
 		return
 	if area.is_in_group("Pumpkins"):

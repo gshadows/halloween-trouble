@@ -78,7 +78,6 @@ func _on_DebugEnable_toggled(button_pressed):
 
 
 func _on_DebugEnable_mouse_entered():
-	print("Margin start: ", $DebugEnable.margin_left)
 	if Input.is_action_pressed("shoot"):
 		return
 	if debug_button_jumped:
@@ -86,4 +85,3 @@ func _on_DebugEnable_mouse_entered():
 	else:
 		$DebugEnable.margin_left = debug_button_start_x + $DebugEnable.rect_size.x
 	debug_button_jumped = not debug_button_jumped
-	print("Margin end: ", $DebugEnable.margin_left)
