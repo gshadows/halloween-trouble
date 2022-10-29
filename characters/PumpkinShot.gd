@@ -1,4 +1,4 @@
-extends Spatial
+extends Area
 
 onready var Explosion = preload("res://characters/PumpkinExplode.tscn")
 
@@ -7,7 +7,6 @@ const SPEED_Y = 7.0
 const START_Y_POS = 1.2
 
 var vertical_velocity: float
-var gravity: float
 
 
 func setup():
@@ -15,7 +14,6 @@ func setup():
 	global_transform.origin = Game.witch.global_transform.origin
 	translation.y += START_Y_POS
 	vertical_velocity = SPEED_Y
-	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _physics_process(delta: float):

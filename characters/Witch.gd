@@ -8,6 +8,7 @@ onready var cam := $Camera
 onready var foot := $WitchFoot
 onready var hud := $HUD
 onready var PumpkinShot = preload("res://characters/PumpkinShot.tscn")
+onready var PumpkinItem = preload("res://objects/PumpkinItem.tscn")
 
 
 const WALK_SPEED_FRONT := 2.0
@@ -34,7 +35,11 @@ var start_cam_y: float
 var cam_dy := 0.0
 var is_pumpkin_fly := false
 var timer: float
+
 var label3d
+var material_witch: SpatialMaterial
+var material_hat: SpatialMaterial
+var material_foot: SpatialMaterial
 
 var health := START_HEALTH
 var candies := 1
@@ -56,6 +61,29 @@ func _ready():
 	hud.set_health(health)
 	hud.set_pumpkins(pumpkins)
 	hud.set_candies(candies)
+	material_witch = prepare_material($Witch)
+	material_hat   = prepare_material($WitchHat)
+	material_foot  = prepare_material($WitchFoot)
+
+
+func prepare_material(mi:MeshInstance) -> SpatialMaterial:
+	var material:SpatialMaterial = mi.mesh.surface_get_material(0)
+	material.albedo_color.a = 1
+	material.flags_transparent = false
+	return material
+
+
+func update_alpha(alpha:float):
+	print("upd_a: ", alpha)
+	material_witch.albedo_color.a = alpha
+	material_hat  .albedo_color.a = alpha
+	material_foot .albedo_color.a = alpha
+
+
+func make_transparent():
+	material_witch.flags_transparent = true
+	material_hat  .flags_transparent = true
+	material_foot .flags_transparent = true
 
 
 func _process(delta:float):
@@ -99,8 +127,7 @@ func _do_death(delta:float):
 	# Move up.
 	translation.y += $Witch.get_aabb().size.y * speed
 	# Fade-out from half-transparent to invisible.
-	var alpha := 0.5 * (1.0 - speed)
-	#material.set_parameter(0, Color(1,1,1, alpha))
+	update_alpha(timer / DEATH_TIME)
 	# Death timer.
 	timer -= delta
 	if timer <= 0:
@@ -140,14 +167,28 @@ func pumpkin_exploded():
 	is_pumpkin_fly = false
 
 
-func _on_Area_area_entered(area):
-	var other = area.get_parent()
-	if other is PumpkinExplode:
-		var dist_sqr = (other.global_transform.origin - global_transform.origin).length_squared()
+func _on_Area_area_entered(area:Area):
+	if area is PumpkinExplode:
+		var dist_sqr = (area.global_transform.origin - global_transform.origin).length_squared()
 		var damage = dist_sqr / EXPLOSION_RADIUS_SQUARE
 		print("Exlosion hit: dist_sqr ", dist_sqr)
 		take_damage(damage)
 		return
+	if area.is_in_group("Pumpkins"):
+		pumpkins += 1
+		hud.set_pumpkins(pumpkins)
+		pick_up(area)
+		return
+	if area.is_in_group("Candies"):
+		candies += 1
+		hud.set_candies(candies)
+		pick_up(area)
+		return
+
+
+func pick_up(n:Node):
+	n.get_parent().remove_child(n)
+	n.queue_free()
 
 
 func take_damage(damage: float):
@@ -164,3 +205,5 @@ func death():
 	Game.witch = null
 	health = 0
 	timer = DEATH_TIME
+	make_transparent()
+	update_alpha(1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://levels/level-01.gd" type="Script" id=1]
 [ext_resource path="res://models/Ground.glb" type="PackedScene" id=2]
@@ -6,12 +6,14 @@
 [ext_resource path="res://models/BushGreen.glb" type="PackedScene" id=4]
 [ext_resource path="res://objects/StreetLamp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://characters/Ghost.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/PumpkinItem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/CandyBowl.tscn" type="PackedScene" id=8]
 
 [node name="level-01" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Witch" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.740083, 0, 5.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.8 )
 
 [node name="Ground" type="Node" parent="."]
 
@@ -92,18 +94,32 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 230, 0, 0 )
 [node name="Statics" type="Node" parent="."]
 
 [node name="BushGreen" parent="Statics" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10747, 0, 4.31927 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13453, 0, 4.31927 )
 
 [node name="BushGreen2" parent="Statics" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93806, 0, 3.46149 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0348792, 0, 3.46149 )
+
+[node name="BushGreen3" parent="Statics" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13111, 0, 6.38499 )
 
 [node name="LampPole" parent="Statics" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24177, -0.0420277, 3.6396 )
+transform = Transform( 0.00974347, -0.421538, 0.906758, 0.831059, 0.507709, 0.227096, -0.556099, 0.751357, 0.35527, 0.731169, -0.0420277, 3.6396 )
+
+[node name="LampPole2" parent="Statics" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74524, -0.0420277, 3.6396 )
 
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Ghost" parent="Enemies" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14023, 0, 5.52688 )
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Pumpkin" parent="Items" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62138, 0, 5.57571 )
+
+[node name="CandyBowl" parent="Items" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75806, 0, 5.4839 )
 
 [connection signal="death" from="Witch" to="." method="_on_Witch_death"]
 [connection signal="win" from="Witch" to="." method="_on_Witch_win"]

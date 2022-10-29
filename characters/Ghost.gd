@@ -1,7 +1,5 @@
 extends Spatial
 
-onready var material: Material
-
 const BORN_TIME  := 1.0
 const PAUSE_TIME := 1.0
 const ATTACK_TIME := 1.0
@@ -32,6 +30,7 @@ var timer := 0.0
 var base_pos: Vector2
 
 var label3d = null
+var material: SpatialMaterial
 
 
 func _ready():
@@ -43,7 +42,8 @@ func _ready():
 		label3d.modulate = Color.cyan
 		label3d.name = "_debug"
 		add_child(label3d)
-	material = $Ghost.get_active_material(0)
+	material = $Ghost.get_active_material(0).duplicate()
+	$Ghost.material_override = material
 	size_y = $Ghost.get_aabb().size.y
 	_change_state(State.PREPARE)
 
@@ -75,7 +75,7 @@ func _change_state(new_state: int, new_next_state = null):
 			visible = true
 			timer = BORN_TIME
 			translation.y -= size_y
-			#material.set_parameter(0, Color(1,1,1, 0.0))
+			material.albedo_color.a = 0
 		State.PAUSE:
 			next_state = new_next_state
 			timer = PAUSE_TIME
@@ -89,7 +89,7 @@ func _change_state(new_state: int, new_next_state = null):
 			timer = FALLBACK_TIME
 		State.DEATH:
 			timer = DEATH_TIME
-			#material.set_parameter(0, Color(1,1,1, 0.5))
+			material.albedo_color.a = 0.5
 	state = new_state
 	state_str = state2str(state)
 	if label3d:
@@ -128,8 +128,9 @@ func _do_born(delta: float):
 	# Move up.
 	translation.y += size_y * speed
 	# Fade-in from invisible to half-transparent.
-	var alpha := 0.5 * (1.0 - speed)
-	#material.set_parameter(0, Color(1,1,1, alpha))
+	var alpha := 0.5 - timer / BORN_TIME * 0.5
+	print("Alpha: ", alpha, ", speed ", speed)
+	material.albedo_color.a = alpha
 	# Born timer.
 	timer -= delta
 	if timer <= 0:
@@ -192,8 +193,8 @@ func _do_death(delta: float):
 	# Move up.
 	translation.y += size_y * speed
 	# Fade-out from half-transparent to invisible.
-	var alpha := 0.5 * (1.0 - speed)
-	#material.set_parameter(0, Color(1,1,1, alpha))
+	var alpha := timer / DEATH_TIME * 0.5
+	material.albedo_color.a = alpha
 	# Death timer.
 	timer -= delta
 	if timer <= 0:
@@ -202,4 +203,4 @@ func _do_death(delta: float):
 
 
 func _on_Area_area_entered(_area):
-	_change_state(State.PAUSE, State.DEATH)
+	_change_state(State.DEATH)
