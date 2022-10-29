@@ -85,3 +85,11 @@ func _on_DebugEnable_mouse_entered():
 	else:
 		$DebugEnable.margin_left = debug_button_start_x + $DebugEnable.rect_size.x
 	debug_button_jumped = not debug_button_jumped
+
+
+func _on_Copyrights_mouse_entered():
+	$Copyrights/CopyrightText.visible = true
+
+
+func _on_Copyrights_mouse_exited():
+	$Copyrights/CopyrightText.visible = false

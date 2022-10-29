@@ -34,7 +34,11 @@ _global_script_class_icons={
 
 config/name="Halloween Trouble"
 config/description="PGD GameJam #10: Revived Fears
-https://gshadow.itch.io/halloween-trouble"
+https://gshadow.itch.io/halloween-trouble
+
+FONT: Ruslan Khasanov (www.ruskhasanov.com)
+https://www.behance.net/gallery/7435569/VETKA-free-font
+"
 run/main_scene="res://Main.tscn"
 config/icon="res://sprites/icon.png"
 

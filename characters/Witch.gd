@@ -102,7 +102,7 @@ func _process(delta:float):
 
 func _do_movement(delta:float):
 	var dx := Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	var dy := Input.get_action_strength("ui_up") - 0.5 #Input.get_action_strength("ui_down")
+	var dy := Input.get_action_strength("ui_up") - 0.5
 	
 	# Walking control.
 	var speed := WALK_SPEED_FRONT if (dx > 0) else WALK_SPEED_BACK

@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/Menu.gd" type="Script" id=1]
+[ext_resource path="res://ui/fnt_game_text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/fnt_menu_small.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.215686, 0.133333, 0.133333, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.807843, 0.403922, 0.109804, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Menu" type="Control"]
 pause_mode = 2
@@ -28,7 +47,8 @@ margin_left = -114.0
 margin_top = -121.0
 margin_right = 114.0
 margin_bottom = -73.0
-text = "S T A R T"
+custom_fonts/font = ExtResource( 2 )
+text = "С Т А Р Т"
 
 [node name="Quit" type="Button" parent="."]
 anchor_left = 0.5
@@ -39,7 +59,8 @@ margin_left = -114.0
 margin_top = -50.0
 margin_right = 114.0
 margin_bottom = -2.0
-text = "Q U I T"
+custom_fonts/font = ExtResource( 2 )
+text = "В Ы Х О Д"
 
 [node name="MusicEnable" type="CheckBox" parent="."]
 anchor_left = 0.5
@@ -47,11 +68,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -111.0
-margin_top = 16.0
+margin_top = 17.0
 margin_right = -45.0
-margin_bottom = 40.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 3 )
 pressed = true
-text = "Music"
+text = "Музыка"
 
 [node name="MusicSlider" type="HSlider" parent="."]
 anchor_left = 0.5
@@ -76,8 +98,9 @@ margin_top = 40.0
 margin_right = -61.0
 margin_bottom = 64.0
 focus_neighbour_right = NodePath("../SfxSlider")
+custom_fonts/font = ExtResource( 3 )
 pressed = true
-text = "SFX"
+text = "Звуки"
 
 [node name="SfxSlider" type="HSlider" parent="."]
 anchor_left = 0.5
@@ -101,7 +124,8 @@ margin_left = -111.0
 margin_top = 65.0
 margin_right = 12.0
 margin_bottom = 89.0
-text = "Full Screen"
+custom_fonts/font = ExtResource( 3 )
+text = "Полн. экран"
 
 [node name="DebugEnable" type="CheckBox" parent="."]
 anchor_left = 0.5
@@ -116,9 +140,10 @@ focus_mode = 0
 custom_colors/font_color_disabled = Color( 0.603922, 0.356863, 0.215686, 1 )
 custom_colors/font_color = Color( 0.603922, 0.356863, 0.215686, 1 )
 custom_colors/font_color_hover = Color( 0.694118, 0.411765, 0.25098, 1 )
-text = "Debug"
+custom_fonts/font = ExtResource( 3 )
+text = "Отладка"
 
-[node name="Label" type="Label" parent="."]
+[node name="GameInfo" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -126,12 +151,42 @@ anchor_bottom = 0.5
 margin_left = -181.0
 margin_top = 100.0
 margin_right = 186.0
-margin_bottom = 181.0
+margin_bottom = 152.0
 custom_colors/font_color = Color( 0.419608, 0.419608, 0.419608, 1 )
-text = "Game by G-Shadow for PGD GameJam #10: Revived Fears
+text = "Game by	 G-Shadow for PGD GameJam #10: Revived Fears
 Itch:      https://gshadow.itch.io
-GitHub: https://gshadows.github.com
-"
+GitHub: https://gshadows.github.com"
+
+[node name="Copyrights" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -179.0
+margin_top = 157.0
+margin_right = -45.0
+margin_bottom = 176.0
+mouse_filter = 1
+custom_colors/font_color = Color( 0.631373, 0.8, 0.333333, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "АВТОРСКИЕ ПРАВА"
+align = 1
+
+[node name="CopyrightText" type="Label" parent="Copyrights"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.0
+margin_top = -321.5
+margin_right = 363.0
+margin_bottom = -20.5
+custom_colors/font_color = Color( 0.662745, 0.576471, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "FONT: Ruslan Khasanov (www.ruskhasanov.com)
+https://www.behance.net/gallery/7435569/VETKA-free-font"
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
@@ -144,3 +199,5 @@ GitHub: https://gshadows.github.com
 [connection signal="toggled" from="FullScreenEnable" to="." method="_on_FullScreenEnable_toggled"]
 [connection signal="mouse_entered" from="DebugEnable" to="." method="_on_DebugEnable_mouse_entered"]
 [connection signal="toggled" from="DebugEnable" to="." method="_on_DebugEnable_toggled"]
+[connection signal="mouse_entered" from="Copyrights" to="." method="_on_Copyrights_mouse_entered"]
+[connection signal="mouse_exited" from="Copyrights" to="." method="_on_Copyrights_mouse_exited"]
