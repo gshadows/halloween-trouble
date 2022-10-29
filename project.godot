@@ -47,6 +47,11 @@ default_bus_layout="res://config/default_bus_layout.tres"
 Settings="*res://config/Settings.gd"
 Game="*res://Game.gd"
 
+[display]
+
+window/size/width=1440
+window/size/height=810
+
 [filesystem]
 
 import/fbx/use_fbx=false
