@@ -26,6 +26,7 @@ environment = ExtResource( 3 )
 
 [node name="Area" type="Area" parent="." index="4"]
 collision_layer = 2
+monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0196905, 0.99956, 0 )
@@ -34,3 +35,4 @@ shape = SubResource( 1 )
 [node name="HUD" parent="." index="5" instance=ExtResource( 4 )]
 
 [connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_Area_area_exited"]

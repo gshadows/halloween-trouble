@@ -9,6 +9,7 @@ onready var foot := $WitchFoot
 onready var hud := $HUD
 onready var PumpkinShot = preload("res://characters/PumpkinShot.tscn")
 onready var PumpkinItem = preload("res://objects/PumpkinItem.tscn")
+onready var CandiesBowl = preload("res://objects/CandyBowl.tscn")
 
 
 const WALK_SPEED_FRONT := 2.0
@@ -35,6 +36,7 @@ var start_cam_y: float
 var cam_dy := 0.0
 var is_pumpkin_fly := false
 var timer: float
+var in_house = null
 
 var label3d
 var material_witch: SpatialMaterial
@@ -71,6 +73,7 @@ func _set_debug_mode():
 	health = 9999
 	candies = 9999
 	pumpkins = 9999
+	translation.x = 32
 
 
 func prepare_material(mi:MeshInstance) -> SpatialMaterial:
@@ -141,10 +144,12 @@ func _do_death(delta:float):
 
 
 func _do_actions():
-	if Input.is_action_just_pressed("shoot") and not is_pumpkin_fly and (pumpkins > 0):
+	if (not is_pumpkin_fly) and (pumpkins > 0) and Input.is_action_just_pressed("shoot"):
 		shoot()
-	if Input.is_action_just_pressed("heal") and (candies > 0):
+	if (candies > 0) and Input.is_action_just_pressed("heal"):
 		heal()
+	if in_house and Input.is_action_just_pressed("ui_down"):
+		ask_candies()
 
 
 func shoot():
@@ -165,6 +170,17 @@ func heal():
 	if health > START_HEALTH:
 		health = START_HEALTH
 	hud.set_health(health)
+
+
+func ask_candies():
+	if not in_house.has_candies:
+		return
+	in_house.has_candies = false
+	var bowl = CandiesBowl.instance()
+	bowl.global_transform.origin = global_transform.origin
+	var dir = -1 if (randi() % 100) >= 50 else +1
+	bowl.transform.origin.x += dir
+	get_parent().add_child(bowl)
 
 
 func pumpkin_exploded():
@@ -189,6 +205,17 @@ func _on_Area_area_entered(area:Area):
 		hud.set_candies(candies)
 		pick_up(area)
 		return
+	if area.is_in_group("Houses"):
+		in_house = area
+		if label3d:
+			label3d.text = "HOUSE"
+
+
+func _on_Area_area_exited(area:Area):
+	if area.is_in_group("Houses"):
+		in_house = null
+		if label3d:
+			label3d.text = ""
 
 
 func pick_up(n:Node):
