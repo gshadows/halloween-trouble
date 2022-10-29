@@ -10,7 +10,10 @@
 [node name="level-01" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Ground" type="Spatial" parent="."]
+[node name="Witch" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.740083, 0, 5.8 )
+
+[node name="Ground" type="Node" parent="."]
 
 [node name="Ground0" parent="Ground" instance=ExtResource( 2 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0 )
@@ -86,7 +89,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 0 )
 [node name="Ground24" parent="Ground" instance=ExtResource( 2 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 230, 0, 0 )
 
-[node name="Statics" type="Spatial" parent="."]
+[node name="Statics" type="Node" parent="."]
 
 [node name="BushGreen" parent="Statics" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10747, 0, 4.31927 )
@@ -97,8 +100,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93806, 0, 3.46149 )
 [node name="LampPole" parent="Statics" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24177, -0.0420277, 3.6396 )
 
-[node name="Witch" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.740083, 0, 5.8 )
+[node name="Enemies" type="Node" parent="."]
 
-[node name="Ghost" parent="." instance=ExtResource( 6 )]
+[node name="Ghost" parent="Enemies" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14023, 0, 5.52688 )
+
+[connection signal="death" from="Witch" to="." method="_on_Witch_death"]
+[connection signal="win" from="Witch" to="." method="_on_Witch_win"]

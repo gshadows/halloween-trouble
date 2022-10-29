@@ -13,3 +13,10 @@ func _input(event):
 	if event.is_action_pressed("fullscreen"):
 		get_tree().set_input_as_handled()
 		OS.window_fullscreen = !OS.window_fullscreen
+
+
+func _on_Witch_death():
+	emit_signal("quit")
+
+func _on_Witch_win():
+	emit_signal("quit")

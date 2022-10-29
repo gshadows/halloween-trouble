@@ -2,7 +2,7 @@ extends Spatial
 
 onready var material: Material
 
-const BORN_TIME  := 2.0
+const BORN_TIME  := 1.0
 const PAUSE_TIME := 1.0
 const ATTACK_TIME := 1.0
 const FALLBACK_TIME := 0.5
@@ -11,6 +11,7 @@ const DEATH_TIME := 5.0
 const WALK_SPEED := 1.0
 const ATTACK_ALTITUDE := 3.0
 const SIGHT_DISTANCE := 5.0
+const SPAWN_DISTANCE := 6.0
 const ATTACK_DISTANCE := 0.5
 const FALLBACK_SPEED := 3.0
 
@@ -20,7 +21,7 @@ const FLY_ALTITUDE := 5.0
 const ATTACK_DPS = 20.0 # Attack damage per second
 
 
-enum State { BORN, PAUSE, FOLLOW, ATTACK, FALLBACK, DEATH }
+enum State { PREPARE, BORN, PAUSE, FOLLOW, ATTACK, FALLBACK, DEATH }
 var state: int
 var next_state: int
 var state_str: String
@@ -31,10 +32,10 @@ var timer := 0.0
 var base_pos: Vector2
 
 var label3d = null
-var witch
 
 
 func _ready():
+	visible = false
 	if Settings.debug:
 		label3d = Label3D.new()
 		label3d.billboard = SpatialMaterial.BILLBOARD_ENABLED
@@ -44,34 +45,13 @@ func _ready():
 		add_child(label3d)
 	material = $Ghost.get_active_material(0)
 	size_y = $Ghost.get_aabb().size.y
-	find_player()
-	_change_state(State.BORN)
+	_change_state(State.PREPARE)
 
 
-func find_player():
-	var root = get_tree().get_root()
-	var parent = self
-	witch = null
-	while true:
-		parent = parent.get_parent()
-		if parent == null:
-			break
-		if parent == root:
-			parent = null
-			break
-		if parent is BaseLevel:
-			break
-	if parent == null:
-		printerr("No base level found! Can't search for witch!")
-		return
-	witch = parent.find_node("Witch")
-	if (witch == null) || (not witch is Witch):
-		printerr("No witch found!")
-		return
-
-
-func _process(delta: float):
+func _physics_process(delta: float):
 	match state:
+		State.PREPARE:
+			_do_prepare()
 		State.BORN:
 			_do_born(delta)
 		State.PAUSE:
@@ -89,7 +69,10 @@ func _process(delta: float):
 func _change_state(new_state: int, new_next_state = null):
 	next_state_str = null
 	match new_state:
+		State.PREPARE:
+			pass
 		State.BORN:
+			visible = true
 			timer = BORN_TIME
 			translation.y -= size_y
 			#material.set_parameter(0, Color(1,1,1, 0.0))
@@ -115,6 +98,7 @@ func _change_state(new_state: int, new_next_state = null):
 
 func state2str(st:int):
 	match st:
+		State.PREPARE:	return "PREPARE"
 		State.BORN:		return "BORN"
 		State.PAUSE:	return "PAUSE"
 		State.FOLLOW:	return "FOLLOW"
@@ -122,6 +106,21 @@ func state2str(st:int):
 		State.FALLBACK:	return "FALLBACK"
 		State.DEATH:	return "DEATH"
 		_: return str(st)
+
+
+func _do_prepare():
+	if not Game.witch:
+		return
+	var dist := get_witch_dist()
+	if (dist <= 0) or (dist >= SPAWN_DISTANCE):
+		return
+	_change_state(State.BORN)
+
+
+func get_witch_dist() -> float:
+	var witch_x = Game.witch.global_transform.origin.x
+	var our_x = global_transform.origin.x
+	return our_x - witch_x
 
 
 func _do_born(delta: float):
@@ -138,26 +137,26 @@ func _do_born(delta: float):
 
 
 func _do_pause(delta: float):
+	if Game.witch:
+		var dist = get_witch_dist()
+		if (dist > -ATTACK_DISTANCE) and (dist < ATTACK_DISTANCE) and (next_state != State.DEATH):
+			_change_state(State.ATTACK)
+			return
 	timer -= delta
 	if timer <= 0:
 		_change_state(next_state)
 
 
 func _do_follow(delta: float):
-	if not witch:
-		find_player()
-		if not witch:
-			_change_state(State.PAUSE, State.FOLLOW)
+	if not Game.witch:
+		_change_state(State.PAUSE, State.FOLLOW)
 		return
 	
-	var witch_x = witch.global_transform.origin.x
-	var our_x = global_transform.origin.x
-	if witch_x >= our_x:
+	var dist := get_witch_dist()
+	if dist <= 0:
 		# Walked around us.
 		_change_state(State.PAUSE, State.DEATH)
 		return
-	
-	var dist = our_x - witch_x
 	if dist > SIGHT_DISTANCE:
 		# Too far away from us.
 		return
@@ -172,7 +171,8 @@ func _do_follow(delta: float):
 func _do_attack(delta: float):
 	translation.y = base_pos.y + ATTACK_ALTITUDE * sin(Time.get_ticks_msec() * 0.1) * delta
 	timer -= delta
-	witch.take_damage(ATTACK_DPS * delta)
+	if Game.witch:
+		Game.witch.take_damage(ATTACK_DPS * delta)
 	if timer <= 0:
 		_change_state(State.FALLBACK)
 
@@ -201,5 +201,5 @@ func _do_death(delta: float):
 		queue_free()
 
 
-func _on_Area_area_entered(area):
+func _on_Area_area_entered(_area):
 	_change_state(State.PAUSE, State.DEATH)
