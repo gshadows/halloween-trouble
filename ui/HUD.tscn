@@ -62,3 +62,11 @@ margin_right = 538.0
 margin_bottom = 46.0
 custom_colors/font_color = Color( 0.294118, 1, 0, 1 )
 text = "0"
+
+[node name="DebugInfo" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 57.0
+margin_right = 220.0
+margin_bottom = 192.0
+custom_colors/font_color = Color( 0.294118, 1, 0, 1 )
+text = "Debug info"

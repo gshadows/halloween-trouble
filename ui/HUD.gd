@@ -9,6 +9,15 @@ var pumpkins: int
 var candies: int
 
 
+func _ready():
+	$DebugInfo.visible = Settings.debug
+	set_process(Settings.debug)
+
+
+func _process(_delta):
+	$DebugInfo.text = "FPS: " + str(Engine.get_frames_per_second())
+
+
 func set_health(value: float):
 	if abs(health - value) >= 1:
 		health = value
