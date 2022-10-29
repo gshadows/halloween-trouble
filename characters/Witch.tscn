@@ -25,7 +25,7 @@ transform = Transform( 1, 0, 0, 0, 0.962218, 0.27228, 0, -0.27228, 0.962218, 0, 
 environment = ExtResource( 3 )
 
 [node name="Area" type="Area" parent="." index="4"]
-monitorable = false
+collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0196905, 0.99956, 0 )

@@ -34,5 +34,6 @@ func explode():
 	Game.witch.pumpkin_exploded()
 
 
-func _on_PumpkinShot_area_entered(_area):
-	explode()
+func _on_PumpkinShot_area_entered(area):
+	if area is Ghost:
+		explode()

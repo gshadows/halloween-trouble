@@ -1,3 +1,4 @@
+class_name Ghost
 extends Spatial
 
 const BORN_TIME  := 1.0
@@ -201,5 +202,6 @@ func _do_death(delta: float):
 		queue_free()
 
 
-func _on_Area_area_entered(_area):
-	_change_state(State.DEATH)
+func _on_Area_area_entered(area):
+	if area is PumpkinExplode:
+		_change_state(State.DEATH)
