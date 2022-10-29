@@ -78,7 +78,7 @@ func _on_DebugEnable_toggled(button_pressed):
 
 
 func _on_DebugEnable_mouse_entered():
-	if Input.is_action_pressed("shoot"):
+	if Settings.debug or Input.is_action_pressed("shoot"):
 		return
 	if debug_button_jumped:
 		$DebugEnable.margin_left = debug_button_start_x
