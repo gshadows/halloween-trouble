@@ -62,6 +62,7 @@ margin_left = -36.0
 margin_top = 16.0
 margin_right = 114.0
 margin_bottom = 40.0
+focus_neighbour_bottom = NodePath("../SfxSlider")
 max_value = 1.0
 step = 0.01
 
@@ -74,6 +75,7 @@ margin_left = -111.0
 margin_top = 40.0
 margin_right = -61.0
 margin_bottom = 64.0
+focus_neighbour_right = NodePath("../SfxSlider")
 pressed = true
 text = "SFX"
 
@@ -86,6 +88,7 @@ margin_left = -36.0
 margin_top = 39.0
 margin_right = 114.0
 margin_bottom = 63.0
+focus_neighbour_top = NodePath("../MusicSlider")
 max_value = 1.0
 step = 0.01
 
@@ -109,6 +112,8 @@ margin_left = 15.0
 margin_top = 65.0
 margin_right = 113.0
 margin_bottom = 89.0
+focus_mode = 0
+custom_colors/font_color = Color( 0.603922, 0.356863, 0.215686, 1 )
 text = "Debug"
 
 [node name="Label" type="Label" parent="."]
@@ -135,4 +140,5 @@ GitHub: https://gshadows.github.com
 [connection signal="drag_ended" from="SfxSlider" to="." method="_on_SfxSlider_drag_ended"]
 [connection signal="value_changed" from="SfxSlider" to="." method="_on_SfxSlider_value_changed"]
 [connection signal="toggled" from="FullScreenEnable" to="." method="_on_FullScreenEnable_toggled"]
+[connection signal="mouse_entered" from="DebugEnable" to="." method="_on_DebugEnable_mouse_entered"]
 [connection signal="toggled" from="DebugEnable" to="." method="_on_DebugEnable_toggled"]

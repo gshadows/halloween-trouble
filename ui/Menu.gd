@@ -3,6 +3,9 @@ extends Control
 signal quit
 signal start
 
+var debug_button_start_x: float
+var debug_button_jumped := false
+
 
 func _ready():
 	$SfxEnable.pressed = Settings.sfx_enable
@@ -11,6 +14,7 @@ func _ready():
 	$MusicSlider.value = Settings.music_volume
 	$FullScreenEnable.pressed = Settings.full_screen
 	$DebugEnable.pressed = Settings.debug
+	debug_button_start_x = $DebugEnable.margin_left
 
 
 func _input(event):
@@ -71,3 +75,15 @@ func _on_SfxSlider_drag_ended(_value_changed):
 func _on_DebugEnable_toggled(button_pressed):
 	Settings.debug = button_pressed
 	Settings.save()
+
+
+func _on_DebugEnable_mouse_entered():
+	print("Margin start: ", $DebugEnable.margin_left)
+	if Input.is_action_pressed("shoot"):
+		return
+	if debug_button_jumped:
+		$DebugEnable.margin_left = debug_button_start_x
+	else:
+		$DebugEnable.margin_left = debug_button_start_x + $DebugEnable.rect_size.x
+	debug_button_jumped = not debug_button_jumped
+	print("Margin end: ", $DebugEnable.margin_left)
