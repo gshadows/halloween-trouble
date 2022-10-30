@@ -14,6 +14,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 539.0
+margin_bottom = 54.0
+color = Color( 0, 0, 0, 0.752941 )
+
 [node name="HealthIcon" type="TextureRect" parent="."]
 margin_left = 12.0
 margin_top = 6.0
