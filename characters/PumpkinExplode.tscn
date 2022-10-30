@@ -1,5 +1,6 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
+[ext_resource path="res://audio/PumkinSquash - 570241__evanski__crunch.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/PumpkinExplode.gd" type="Script" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
@@ -766,3 +767,7 @@ mesh = SubResource( 72 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 73 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 1 )
+unit_db = 10.0

@@ -21,6 +21,8 @@ func _ready():
 	for i in parts.size():
 		var dir:Vector3 = parts[i].get_aabb().get_center().normalized()
 		vectors.push_back(Vector2(dir.x * FLY_SPEED_X, dir.y * FLY_SPEED_Y))
+	
+	$AudioStreamPlayer3D.play(0.25)
 
 
 func _physics_process(delta: float):

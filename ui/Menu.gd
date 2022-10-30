@@ -123,3 +123,13 @@ func clickSnd():
 func _on_Hover():
 	$AudioStreamPlayer.stream = sndHover
 	$AudioStreamPlayer.play()
+
+
+func _on_Help_mouse_entered():
+	_on_Hover()
+	$Help/HelpText.visible = true
+
+
+func _on_Help_mouse_exited():
+	_on_Hover()
+	$Help/HelpText.visible = false

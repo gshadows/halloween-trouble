@@ -186,8 +186,56 @@ margin_bottom = -20.5
 custom_colors/font_color = Color( 0.662745, 0.576471, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/normal = SubResource( 1 )
-text = "FONT: Ruslan Khasanov (www.ruskhasanov.com)
-https://www.behance.net/gallery/7435569/VETKA-free-font"
+text = "Бесплатный ШРИФТ: (c) Ruslan Khasanov (www.ruskhasanov.com)
+https://www.behance.net/gallery/7435569/VETKA-free-font
+
+Бесплатная МУЗЫКА с freemusicarchive.org:
+1) Tom Aldrich - Mysterious
+2) Disco Missile - Jet (live)
+
+Бесплатные звуки с FreeSound.org:
+(c) yoyodaman234, inchadney, yudena, justinvoke, horroraudio, dominictreis,
+breviceps, dkiller2204, glaneur-de-sons, ryusa, evanski, amir2mi"
+
+[node name="Help" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 27.0
+margin_top = 157.0
+margin_right = 161.0
+margin_bottom = 176.0
+mouse_filter = 1
+custom_colors/font_color = Color( 0.631373, 0.8, 0.333333, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "ПОМОЩЬ"
+align = 1
+
+[node name="HelpText" type="Label" parent="Help"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -196.0
+margin_top = -248.5
+margin_right = 17.0
+margin_bottom = -20.5
+custom_colors/font_color = Color( 0.662745, 0.576471, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "=== УПРАВЛЕНИЕ ===
+Ходить: A, D
+Бег: Shift
+Стрелять: Ctrl или ЛКМ
+
+Обзор: W
+Действие: S
+Лечиться: F
+
+Полный экран: Alt + Enter
+Выход: Esc"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
@@ -217,3 +265,5 @@ bus = "Music"
 [connection signal="toggled" from="DebugEnable" to="." method="_on_DebugEnable_toggled"]
 [connection signal="mouse_entered" from="Copyrights" to="." method="_on_Copyrights_mouse_entered"]
 [connection signal="mouse_exited" from="Copyrights" to="." method="_on_Copyrights_mouse_exited"]
+[connection signal="mouse_entered" from="Help" to="." method="_on_Help_mouse_entered"]
+[connection signal="mouse_exited" from="Help" to="." method="_on_Help_mouse_exited"]
