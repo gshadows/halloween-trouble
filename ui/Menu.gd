@@ -9,7 +9,7 @@ onready var sndJoke = preload("res://audio/MenuJoke - 420615__glaneur-de-sons__s
 
 var debug_button_start_x: float
 var debug_button_jumped := false
-var in_redy = true
+var in_ready = true
 
 
 func _ready():
@@ -20,14 +20,27 @@ func _ready():
 	$FullScreenEnable.pressed = Settings.full_screen
 	$DebugEnable.pressed = Settings.debug
 	debug_button_start_x = $DebugEnable.margin_left
-	in_redy = false
+	in_ready = false
+
+
+func loose():
+	$GameLoose.visible = true
+
+
+func win():
+	$GameWin.visible = true
 
 
 func _input(event):
 	# Quit or back.
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().set_input_as_handled()
-		emit_signal("quit")
+		if $GameWin.visible or $GameLoose.visible:
+			$GameWin.visible = false
+			$GameLoose.visible = false
+			clickSnd()
+		else:
+			get_tree().set_input_as_handled()
+			emit_signal("quit")
 	# Full screen switch.
 	if event.is_action_pressed("fullscreen"):
 		get_tree().set_input_as_handled()
@@ -115,7 +128,7 @@ func _on_Copyrights_mouse_exited():
 
 
 func clickSnd():
-	if not in_redy:
+	if not in_ready:
 		$AudioStreamPlayer.stream = sndClick
 		$AudioStreamPlayer.play()
 

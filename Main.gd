@@ -42,10 +42,12 @@ func open_level(level):
 
 func loose():
 	open_menu()
+	menu_node.loose()
 
 
 func win():
 	open_menu()
+	menu_node.win()
 
 
 func unload_level():
