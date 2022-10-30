@@ -289,3 +289,10 @@ func death():
 	$AudioEffects.stream = voiceLoose
 	$AudioEffects.play()
 	emit_signal("death")
+
+
+func _on_SpiderArea_area_entered(area):
+	var sp_area = get_parent().get_node("SpiderArea")
+	get_parent().remove_child(sp_area)
+	sp_area.queue_free()
+	$Camera/Spider.start()
