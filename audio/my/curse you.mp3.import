@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/curse you.mp3-243a574980e2e7ce11dcc1d5bed431a9.mp3str"
+
+[deps]
+
+source_file="res://audio/my/curse you.mp3"
+dest_files=[ "res://.import/curse you.mp3-243a574980e2e7ce11dcc1d5bed431a9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -29,7 +29,7 @@
 [ext_resource path="res://models/Tombstone.glb" type="PackedScene" id=27]
 [ext_resource path="res://models/TombAssymetrical.glb" type="PackedScene" id=28]
 [ext_resource path="res://audio/Tom Aldrich - Mysterious.mp3" type="AudioStream" id=29]
-[ext_resource path="res://audio/Forest - 25945__inchadney__owl.wav" type="AudioStream" id=30]
+[ext_resource path="res://audio/Forest - 25945__inchadney__owl.mp3" type="AudioStream" id=30]
 [ext_resource path="res://objects/EndGame.tscn" type="PackedScene" id=31]
 
 [node name="level-01" type="Spatial"]

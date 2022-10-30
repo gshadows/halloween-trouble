@@ -12,9 +12,10 @@ onready var PumpkinShot = preload("res://characters/PumpkinShot.tscn")
 onready var PumpkinItem = preload("res://objects/PumpkinItem.tscn")
 onready var CandiesBowl = preload("res://objects/CandyBowl.tscn")
 onready var sndPickup = preload("res://audio/Pickup - 531175__ryusa__synth-glockenspiel-bell-item-money-gold-coin-pick-up.wav")
-onready var voiceShoot = null
-onready var voiceCandies = null
-onready var voiceLoose = null
+onready var sndShoot = preload("res://audio/Throw - 515625__mrickey13__throw-swipe.wav")
+onready var voiceTrick = preload("res://audio/my/trick or treat.mp3")
+onready var voiceCandies = preload("res://audio/my/take candies.mp3")
+onready var voiceLoose = preload("res://audio/my/curse you.mp3")
 
 
 const WALK_SPEED_FRONT := 2.0
@@ -175,6 +176,8 @@ func _do_actions():
 func shoot():
 	if label3d:
 		label3d.text = "shot"
+	$AudioEffects.stream = sndShoot
+	$AudioEffects.play()
 	is_pumpkin_fly = true
 	pumpkins -= 1
 	hud.set_pumpkins(pumpkins)
@@ -184,6 +187,8 @@ func shoot():
 
 
 func heal():
+	$AudioEffects.stream = sndPickup
+	$AudioEffects.play()
 	candies -= 1
 	hud.set_candies(candies)
 	health += CANDY_HEALTH
@@ -193,11 +198,27 @@ func heal():
 
 
 func ask_candies():
+	var house = in_house
+	# Knock to the door.
+	$AudioKnock.play()
+	yield($AudioKnock, "finished")
+	# Make music quieter.
+	house.do_quiet(true)
+	$AudioEffects.stream = voiceTrick
+	$AudioEffects.play()
+	yield($AudioEffects, "finished")
+	# If no more candies - restore music and quit.
+	if not house.has_candies:
+		house.do_quiet(false)
+		return
+	# Answer "take candies, please!"
 	$AudioEffects.stream = voiceCandies
 	$AudioEffects.play()
-	if not in_house.has_candies:
-		return
-	in_house.has_candies = false
+	yield($AudioEffects, "finished")
+	# Restore music volume.
+	house.do_quiet(false)
+	# Put candies.
+	house.has_candies = false
 	var bowl = CandiesBowl.instance()
 	get_parent().add_child(bowl)
 	bowl.global_transform.origin = global_transform.origin
@@ -265,6 +286,6 @@ func death():
 	timer = DEATH_TIME
 	make_transparent()
 	update_alpha(1)
-	$AudioVoice.stream = voiceLoose
-	$AudioVoice.play()
+	$AudioEffects.stream = voiceLoose
+	$AudioEffects.play()
 	emit_signal("death")

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Knock (modified) - 256513__deleted-user-4772965__knock-on-the-door.mp3-03b4fd8bb4e6c95bcc243ae8849ab586.mp3str"
+
+[deps]
+
+source_file="res://audio/Knock (modified) - 256513__deleted-user-4772965__knock-on-the-door.mp3"
+dest_files=[ "res://.import/Knock (modified) - 256513__deleted-user-4772965__knock-on-the-door.mp3-03b4fd8bb4e6c95bcc243ae8849ab586.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

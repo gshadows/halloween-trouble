@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/povylazili.mp3-a5121b63bc6a4c4390b9d652ead53205.mp3str"
+
+[deps]
+
+source_file="res://audio/my/povylazili.mp3"
+dest_files=[ "res://.import/povylazili.mp3-a5121b63bc6a4c4390b9d652ead53205.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

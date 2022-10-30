@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Forest - 25945__inchadney__owl.mp3-7fe469c0e4f1fced7f107249e45d7333.mp3str"
+
+[deps]
+
+source_file="res://audio/Forest - 25945__inchadney__owl.mp3"
+dest_files=[ "res://.import/Forest - 25945__inchadney__owl.mp3-7fe469c0e4f1fced7f107249e45d7333.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
