@@ -12,6 +12,11 @@ onready var hud := $HUD
 onready var PumpkinShot = preload("res://characters/PumpkinShot.tscn")
 onready var PumpkinItem = preload("res://objects/PumpkinItem.tscn")
 onready var CandiesBowl = preload("res://objects/CandyBowl.tscn")
+onready var sndPickup = preload("res://audio/Pickup - 531175__ryusa__synth-glockenspiel-bell-item-money-gold-coin-pick-up.wav")
+onready var sndLoose = preload("res://audio/Loose - 488963__dominictreis__sad-or-scary-scene-change-music.mp3")
+onready var voiceShoot = null
+onready var voiceCandies = null
+onready var voiceLoose = null
 
 
 const WALK_SPEED_FRONT := 2.0
@@ -137,6 +142,10 @@ func _do_movement(delta:float):
 		dy -= 0.5
 	cam_dy = clamp(cam_dy + dy * delta * CAM_SPEED_Y, 0.0, CAM_MAX_DY)
 	cam.translation.y = start_cam_y + cam_dy
+	
+	# Sound
+	if (abs(dx) > 0.01) and not $AudioSteps.playing:
+		$AudioSteps.play()
 
 
 func _do_death(delta:float):
@@ -181,6 +190,8 @@ func heal():
 
 
 func ask_candies():
+	$AudioEffects.stream = voiceCandies
+	$AudioEffects.play()
 	if not in_house.has_candies:
 		return
 	in_house.has_candies = false
@@ -227,6 +238,8 @@ func _on_Area_area_exited(area:Area):
 
 
 func pick_up(n:Node):
+	$AudioEffects.stream = sndPickup
+	$AudioEffects.play()
 	n.get_parent().remove_child(n)
 	n.queue_free()
 
@@ -237,6 +250,8 @@ func take_damage(damage: float):
 	health -= damage
 	if health <= 0:
 		death()
+	elif not $AudioPain.playing:
+		$AudioPain.play()
 	hud.set_health(health)
 
 
@@ -247,3 +262,9 @@ func death():
 	timer = DEATH_TIME
 	make_transparent()
 	update_alpha(1)
+	$AudioVoice.stream = voiceLoose
+	$AudioVoice.play()
+	var playerMus: AudioStreamPlayer = get_parent().get_node("AudioMusic")
+	playerMus.stop()
+	playerMus.stream = sndLoose
+	playerMus.play()

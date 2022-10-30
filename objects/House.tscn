@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://audio/Disco Missile - Jet (live) - Modified CC BY NC.mp3" type="AudioStream" id=1]
 [ext_resource path="res://materials/yellow_light.tres" type="Material" id=2]
 [ext_resource path="res://objects/House.gd" type="Script" id=3]
 
@@ -52,3 +53,14 @@ material/0 = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18737, 6.12036 )
 shape = SubResource( 4 )
+
+[node name="AudioStreamMusic" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.215, 4.5 )
+stream = ExtResource( 1 )
+attenuation_model = 2
+unit_db = 40.0
+autoplay = true
+max_distance = 10.0
+bus = "SFX"
+
+[node name="AudioStreamHouse" type="AudioStreamPlayer3D" parent="."]

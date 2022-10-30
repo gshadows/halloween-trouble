@@ -1,6 +1,9 @@
 class_name Ghost
 extends Spatial
 
+var sndBorn = preload("res://audio/GhostAppear - 377567__yudena__ghost1-bymondfisch89.ogg")
+var sndDeath = preload("res://audio/GhostDeath - 431979__horroraudio__kid-ghost-sigh.wav")
+
 const BORN_TIME  := 1.0
 const PAUSE_TIME := 1.0
 const ATTACK_TIME := 1.0
@@ -77,6 +80,8 @@ func _change_state(new_state: int, new_next_state = null):
 			timer = BORN_TIME
 			translation.y -= size_y
 			material.albedo_color.a = 0
+			$AudioStreamPlayer3D.stream = sndBorn
+			$AudioStreamPlayer3D.play()
 		State.PAUSE:
 			next_state = new_next_state
 			timer = PAUSE_TIME
@@ -89,6 +94,8 @@ func _change_state(new_state: int, new_next_state = null):
 		State.FALLBACK:
 			timer = FALLBACK_TIME
 		State.DEATH:
+			$AudioStreamPlayer3D.stream = sndDeath
+			$AudioStreamPlayer3D.play()
 			timer = DEATH_TIME
 			material.albedo_color.a = 0.5
 	state = new_state

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SipderJoke - 624704__amir2mi__spider-eating-the-bait.mp3-05f0d892e5ce65058170916fe021e197.mp3str"
+
+[deps]
+
+source_file="res://audio/SipderJoke - 624704__amir2mi__spider-eating-the-bait.mp3"
+dest_files=[ "res://.import/SipderJoke - 624704__amir2mi__spider-eating-the-bait.mp3-05f0d892e5ce65058170916fe021e197.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

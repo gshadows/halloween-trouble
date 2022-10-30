@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/Menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fnt_game_text.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/fnt_menu_small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://audio/Menu - 362281__dominictreis__scene-change-music-sad.mp3" type="AudioStream" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 8.0
@@ -188,14 +189,29 @@ custom_styles/normal = SubResource( 1 )
 text = "FONT: Ruslan Khasanov (www.ruskhasanov.com)
 https://www.behance.net/gallery/7435569/VETKA-free-font"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
+
+[node name="AudioStreamMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Music"
+
+[connection signal="mouse_entered" from="Start" to="." method="_on_Hover"]
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="mouse_entered" from="Quit" to="." method="_on_Hover"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="mouse_entered" from="MusicEnable" to="." method="_on_Hover"]
 [connection signal="toggled" from="MusicEnable" to="." method="_on_MusicEnable_toggled"]
 [connection signal="drag_ended" from="MusicSlider" to="." method="_on_MusicSlider_drag_ended"]
+[connection signal="mouse_entered" from="MusicSlider" to="." method="_on_Hover"]
 [connection signal="value_changed" from="MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="mouse_entered" from="SfxEnable" to="." method="_on_Hover"]
 [connection signal="toggled" from="SfxEnable" to="." method="_on_SfxEnable_toggled"]
 [connection signal="drag_ended" from="SfxSlider" to="." method="_on_SfxSlider_drag_ended"]
+[connection signal="mouse_entered" from="SfxSlider" to="." method="_on_Hover"]
 [connection signal="value_changed" from="SfxSlider" to="." method="_on_SfxSlider_value_changed"]
+[connection signal="mouse_entered" from="FullScreenEnable" to="." method="_on_Hover"]
 [connection signal="toggled" from="FullScreenEnable" to="." method="_on_FullScreenEnable_toggled"]
 [connection signal="mouse_entered" from="DebugEnable" to="." method="_on_DebugEnable_mouse_entered"]
 [connection signal="toggled" from="DebugEnable" to="." method="_on_DebugEnable_toggled"]

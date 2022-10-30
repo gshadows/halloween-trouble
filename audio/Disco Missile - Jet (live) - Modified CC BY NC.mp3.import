@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Disco Missile - Jet (live) - Modified CC BY NC.mp3-884af4f001b66e0346e7130e1a23b174.mp3str"
+
+[deps]
+
+source_file="res://audio/Disco Missile - Jet (live) - Modified CC BY NC.mp3"
+dest_files=[ "res://.import/Disco Missile - Jet (live) - Modified CC BY NC.mp3-884af4f001b66e0346e7130e1a23b174.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

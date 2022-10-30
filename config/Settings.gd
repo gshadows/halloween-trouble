@@ -10,7 +10,7 @@ const CFG_PATH = "config.ini"
 var sfx_volume := 1.0
 var sfx_enable := true
 
-var music_volume := 1.0
+var music_volume := 0.3
 var music_enable := true
 
 var full_screen := false

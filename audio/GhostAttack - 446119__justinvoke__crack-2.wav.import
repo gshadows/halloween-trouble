@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GhostAttack - 446119__justinvoke__crack-2.wav-508b3190a31aaee30d9bd6310becd77c.sample"
+
+[deps]
+
+source_file="res://audio/GhostAttack - 446119__justinvoke__crack-2.wav"
+dest_files=[ "res://.import/GhostAttack - 446119__justinvoke__crack-2.wav-508b3190a31aaee30d9bd6310becd77c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

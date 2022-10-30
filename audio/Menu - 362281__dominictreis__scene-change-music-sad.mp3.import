@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Menu - 362281__dominictreis__scene-change-music-sad.mp3-565263210c1df555cf7b7a5f4fbd07ea.mp3str"
+
+[deps]
+
+source_file="res://audio/Menu - 362281__dominictreis__scene-change-music-sad.mp3"
+dest_files=[ "res://.import/Menu - 362281__dominictreis__scene-change-music-sad.mp3-565263210c1df555cf7b7a5f4fbd07ea.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
