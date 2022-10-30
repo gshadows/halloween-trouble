@@ -2,7 +2,6 @@ class_name Witch
 extends Spatial
 
 signal death
-signal win
 
 onready var cam := $Camera
 onready var hat := $WitchHat
@@ -13,7 +12,6 @@ onready var PumpkinShot = preload("res://characters/PumpkinShot.tscn")
 onready var PumpkinItem = preload("res://objects/PumpkinItem.tscn")
 onready var CandiesBowl = preload("res://objects/CandyBowl.tscn")
 onready var sndPickup = preload("res://audio/Pickup - 531175__ryusa__synth-glockenspiel-bell-item-money-gold-coin-pick-up.wav")
-onready var sndLoose = preload("res://audio/Loose - 488963__dominictreis__sad-or-scary-scene-change-music.mp3")
 onready var voiceShoot = null
 onready var voiceCandies = null
 onready var voiceLoose = null
@@ -45,6 +43,8 @@ var cam_dy := 0.0
 var is_pumpkin_fly := false
 var timer: float
 var in_house = null
+var win := false
+var moment_speed_x: float
 
 var label3d
 var material_witch: SpatialMaterial
@@ -105,6 +105,8 @@ func make_transparent():
 
 
 func _physics_process(delta:float):
+	if win:
+		return
 	if health > 0:
 		_do_movement(delta)
 		_do_actions()
@@ -126,7 +128,8 @@ func _do_movement(delta:float):
 		period = STEP_PERIOD
 	
 	# Apply movement.
-	translation.x += dx * speed * delta
+	moment_speed_x = dx * speed
+	translation.x += moment_speed_x * delta
 	if translation.x < 0:
 		translation.x = 0
 	var mov_y = sin((translation.x - start_pos.x) * period / speed) * delta * STEP_ALTITUDE
@@ -151,13 +154,13 @@ func _do_movement(delta:float):
 func _do_death(delta:float):
 	var speed := (1.0 / DEATH_TIME) * delta
 	# Move up.
-	translation.y += $Witch.get_aabb().size.y * speed
+	var dy = $Witch.get_aabb().size.y * speed
+	translation.y += dy
+	cam.translation.y += dy
 	# Fade-out from half-transparent to invisible.
 	update_alpha(timer / DEATH_TIME)
 	# Death timer.
 	timer -= delta
-	if timer <= 0:
-		emit_signal("death")
 
 
 func _do_actions():
@@ -176,7 +179,7 @@ func shoot():
 	pumpkins -= 1
 	hud.set_pumpkins(pumpkins)
 	var pumpkin = PumpkinShot.instance()
-	pumpkin.setup()
+	pumpkin.setup(moment_speed_x)
 	get_parent().add_child(pumpkin)
 
 
@@ -196,10 +199,10 @@ func ask_candies():
 		return
 	in_house.has_candies = false
 	var bowl = CandiesBowl.instance()
+	get_parent().add_child(bowl)
 	bowl.global_transform.origin = global_transform.origin
 	var dir = -1 if (randi() % 100) >= 50 else +1
 	bowl.transform.origin.x += dir
-	get_parent().add_child(bowl)
 
 
 func pumpkin_exploded():
@@ -264,7 +267,4 @@ func death():
 	update_alpha(1)
 	$AudioVoice.stream = voiceLoose
 	$AudioVoice.play()
-	var playerMus: AudioStreamPlayer = get_parent().get_node("AudioMusic")
-	playerMus.stop()
-	playerMus.stream = sndLoose
-	playerMus.play()
+	emit_signal("death")

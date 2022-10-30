@@ -35,7 +35,17 @@ func open_level(level):
 	unload_menu()
 	level_node = load(GAME_SCENE_TEMPLATE + level + ".tscn").instance()
 	level_node.connect("quit", self, "open_menu")
+	level_node.connect("win", self, "win")
+	level_node.connect("loose", self, "loose")
 	add_child(level_node)
+
+
+func loose():
+	open_menu()
+
+
+func win():
+	open_menu()
 
 
 func unload_level():

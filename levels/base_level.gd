@@ -2,6 +2,12 @@ class_name BaseLevel
 extends Spatial
 
 signal quit
+signal loose
+signal win
+
+onready var sndLoose = preload("res://audio/Loose - 488963__dominictreis__sad-or-scary-scene-change-music.mp3")
+onready var sndWin = preload("res://audio/Win - 530265__dominictreis__morning-transition-music.wav")
+onready var player: AudioStreamPlayer = $MusicPlayer
 
 
 func _input(event):
@@ -16,7 +22,16 @@ func _input(event):
 
 
 func _on_Witch_death():
-	emit_signal("quit")
+	player.stream = sndLoose
+	player.play()
+	yield(player, "finished")
+	emit_signal("loose")
+
 
 func _on_Witch_win():
-	emit_signal("quit")
+	player.stream = sndWin
+	player.play()
+	yield(get_tree().create_timer(1), "timeout")
+	Game.witch.win = true
+	yield(player, "finished")
+	emit_signal("win")

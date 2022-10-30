@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://levels/level-01.gd" type="Script" id=1]
 [ext_resource path="res://models/Ground.glb" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://models/TombAssymetrical.glb" type="PackedScene" id=28]
 [ext_resource path="res://audio/Tom Aldrich - Mysterious.mp3" type="AudioStream" id=29]
 [ext_resource path="res://audio/Forest - 25945__inchadney__owl.wav" type="AudioStream" id=30]
+[ext_resource path="res://objects/EndGame.tscn" type="PackedScene" id=31]
 
 [node name="level-01" type="Spatial"]
 script = ExtResource( 1 )
@@ -246,6 +247,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.9708, 0, 2.85067 )
 
 [node name="BushYellow15" parent="Statics" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.5551, 0, 4.26516 )
+
+[node name="BushYellow16" parent="Statics" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0392, 0, 7.99975 )
+
+[node name="BushYellow17" parent="Statics" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.635, -9.53674e-07, 8.24906 )
 
 [node name="BushRed16" parent="Statics" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5514, 0, 8.00054 )
@@ -1648,9 +1655,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4377, 0, 3.64207 )
 [node name="TreeRed7" parent="Statics" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5313, 0, 4.41757 )
 
-[node name="TreeRed8" parent="Statics" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2127, 0, 7.49785 )
-
 [node name="TreeYellow8" parent="Statics" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1608, 0, 1.93098 )
 
@@ -1885,15 +1889,18 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.88508
 [node name="WallLamp2" parent="Items/House" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77771, 1.52588e-05, 1.85808 )
 
+[node name="EndGame" parent="." instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 5.01781 )
+
 [node name="AudioForest" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 30 )
 autoplay = true
 bus = "SFX"
 
-[node name="AudioMusic" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 29 )
 autoplay = true
 bus = "Music"
 
 [connection signal="death" from="Witch" to="." method="_on_Witch_death"]
-[connection signal="win" from="Witch" to="." method="_on_Witch_win"]
+[connection signal="area_entered" from="EndGame" to="." method="_on_EndGame_area_entered"]
