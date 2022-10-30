@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/Menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fnt_game_text.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/fnt_menu_small.tres" type="DynamicFont" id=3]
 [ext_resource path="res://audio/Menu - 362281__dominictreis__scene-change-music-sad.mp3" type="AudioStream" id=4]
+[ext_resource path="res://sprites/Logo.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 8.0
@@ -38,6 +39,16 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.12549, 0.0901961, 0.117647, 1 )
+
+[node name="Logo" type="TextureRect" parent="."]
+modulate = Color( 0.443137, 0.227451, 0, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -166.5
+margin_top = 5.0
+margin_right = 166.5
+margin_bottom = 171.0
+texture = ExtResource( 5 )
 
 [node name="Start" type="Button" parent="."]
 anchor_left = 0.5
