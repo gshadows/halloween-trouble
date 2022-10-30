@@ -5,6 +5,8 @@ signal death
 signal win
 
 onready var cam := $Camera
+onready var hat := $WitchHat
+onready var body := $Witch
 onready var foot := $WitchFoot
 onready var hud := $HUD
 onready var PumpkinShot = preload("res://characters/PumpkinShot.tscn")
@@ -17,7 +19,7 @@ const WALK_SPEED_BACK := 1.0
 const RUN_SPEED_MULTIPLIER := 3.0
 
 const STEP_PERIOD := 12.0
-const STEP_ALTITUDE := 3.0
+const STEP_ALTITUDE := 1.7
 
 const FOOT_PERIOD := Vector2(1, 1)
 const DEATH_TIME := 10.0
@@ -31,6 +33,7 @@ const CANDY_HEALTH := 30.0
 
 
 var start_pos: Vector2
+var start_rot: float
 var start_foot_pos: Vector2
 var start_cam_y: float
 var cam_dy := 0.0
@@ -52,7 +55,8 @@ func _ready():
 	if Settings.debug:
 		_set_debug_mode()
 	Game.witch = self
-	start_pos = Vector2(translation.x, translation.y)
+	start_pos = Vector2(body.translation.x, body.translation.y)
+	start_rot = body.rotation.y
 	start_foot_pos = Vector2(foot.translation.x, foot.translation.y)
 	start_cam_y = cam.translation.y
 	hud.set_health(health)
@@ -95,7 +99,7 @@ func make_transparent():
 	material_foot .flags_transparent = true
 
 
-func _process(delta:float):
+func _physics_process(delta:float):
 	if health > 0:
 		_do_movement(delta)
 		_do_actions()
@@ -105,7 +109,7 @@ func _process(delta:float):
 
 func _do_movement(delta:float):
 	var dx := Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	var dy := Input.get_action_strength("ui_up") - 0.5
+	var dy := Input.get_action_strength("ui_up") #- 0.5
 	
 	# Walking control.
 	var speed := WALK_SPEED_FRONT if (dx > 0) else WALK_SPEED_BACK
@@ -120,13 +124,17 @@ func _do_movement(delta:float):
 	translation.x += dx * speed * delta
 	if translation.x < 0:
 		translation.x = 0
-	translation.y = start_pos.y + sin((translation.x - start_pos.x) * period / speed) * delta * STEP_ALTITUDE
+	var mov_y = sin((translation.x - start_pos.x) * period / speed) * delta * STEP_ALTITUDE
+	body.translation.y = start_pos.y + mov_y
+	body.rotation.y = start_rot + mov_y * 4
 	
 	# Foot animation.
-	foot.translation.x = start_foot_pos.x + 0
-	foot.translation.y = start_foot_pos.y + 0
+	foot.translation.x = start_foot_pos.x + mov_y
+	foot.translation.y = start_foot_pos.y + mov_y
 	
 	# Camera motion.
+	if cam_dy > 0:
+		dy -= 0.5
 	cam_dy = clamp(cam_dy + dy * delta * CAM_SPEED_Y, 0.0, CAM_MAX_DY)
 	cam.translation.y = start_cam_y + cam_dy
 
