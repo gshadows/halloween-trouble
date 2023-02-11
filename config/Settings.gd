@@ -16,6 +16,7 @@ var music_enable := true
 var full_screen := false
 
 var debug := OS.is_debug_build()
+var lang := "en"
 
 
 func _ready():
@@ -34,7 +35,7 @@ func save():
 
 	config.set_value("video", "full_screen", full_screen)
 
-	config.set_value("game", "debug", debug)
+	config.set_value("game", "lang", TranslationServer.get_locale())
 
 	config.save(CFG_PATH)
 
@@ -53,7 +54,7 @@ func reload():
 
 	full_screen = config.get_value("video", "full_screen", full_screen)
 
-	debug = config.get_value("game", "debug", debug)
+	lang = config.get_value("game", "lang", lang)
 
 
 func apply():
@@ -64,3 +65,4 @@ func apply():
 	AudioServer.set_bus_mute(AUDIO_BUS_MUSIC, !music_enable)
 
 	OS.window_fullscreen = full_screen
+	TranslationServer.set_locale(lang)

@@ -119,6 +119,12 @@ heal={
  ]
 }
 
+[locale]
+
+test="ru"
+locale_filter=[ 0, [ "en", "ru" ] ]
+translations=PoolStringArray( "res://config/translations.en.translation", "res://config/translations.ru.translation" )
+
 [physics]
 
 common/enable_pause_aware_picking=true

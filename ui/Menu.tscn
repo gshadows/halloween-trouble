@@ -60,7 +60,7 @@ margin_top = -121.0
 margin_right = 114.0
 margin_bottom = -73.0
 custom_fonts/font = ExtResource( 2 )
-text = "С Т А Р Т"
+text = "START"
 
 [node name="Quit" type="Button" parent="."]
 anchor_left = 0.5
@@ -72,7 +72,7 @@ margin_top = -50.0
 margin_right = 114.0
 margin_bottom = -2.0
 custom_fonts/font = ExtResource( 2 )
-text = "В Ы Х О Д"
+text = "QUIT"
 
 [node name="MusicEnable" type="CheckBox" parent="."]
 anchor_left = 0.5
@@ -85,7 +85,7 @@ margin_right = -45.0
 margin_bottom = 41.0
 custom_fonts/font = ExtResource( 3 )
 pressed = true
-text = "Музыка"
+text = "MUSIC"
 
 [node name="MusicSlider" type="HSlider" parent="."]
 anchor_left = 0.5
@@ -112,7 +112,7 @@ margin_bottom = 64.0
 focus_neighbour_right = NodePath("../SfxSlider")
 custom_fonts/font = ExtResource( 3 )
 pressed = true
-text = "Звуки"
+text = "SOUNDS"
 
 [node name="SfxSlider" type="HSlider" parent="."]
 anchor_left = 0.5
@@ -137,7 +137,7 @@ margin_top = 65.0
 margin_right = 12.0
 margin_bottom = 89.0
 custom_fonts/font = ExtResource( 3 )
-text = "Полн. экран"
+text = "FULLSCREEN"
 
 [node name="DebugEnable" type="CheckBox" parent="."]
 anchor_left = 0.5
@@ -153,7 +153,7 @@ custom_colors/font_color_disabled = Color( 0.603922, 0.356863, 0.215686, 1 )
 custom_colors/font_color = Color( 0.603922, 0.356863, 0.215686, 1 )
 custom_colors/font_color_hover = Color( 0.694118, 0.411765, 0.25098, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "Отладка"
+text = "DEBUG"
 
 [node name="GameInfo" type="Label" parent="."]
 anchor_left = 0.5
@@ -181,7 +181,7 @@ margin_bottom = 176.0
 mouse_filter = 1
 custom_colors/font_color = Color( 0.631373, 0.8, 0.333333, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "АВТОРСКИЕ ПРАВА"
+text = "COPYRIGHT"
 align = 1
 
 [node name="CopyrightText" type="Label" parent="Copyrights"]
@@ -197,19 +197,7 @@ margin_bottom = -20.5
 custom_colors/font_color = Color( 0.662745, 0.576471, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/normal = SubResource( 1 )
-text = "Бесплатный ШРИФТ: (c) Ruslan Khasanov (www.ruskhasanov.com)
-https://www.behance.net/gallery/7435569/VETKA-free-font
-
-Бесплатная МУЗЫКА с freemusicarchive.org:
-1) Tom Aldrich - Mysterious
-2) Disco Missile - Jet (live)
-
-Бесплатные ЗВУКИ с FreeSound.org:
-(c) yoyodaman234, inchadney, yudena, justinvoke, horroraudio, dominictreis,
-breviceps, dkiller2204, glaneur-de-sons, ryusa, evanski, amir2mi, mrickey13,
-deleted-user
-
-Озвучка - моя :)"
+text = "COPYRIGHT_TXT"
 
 [node name="Help" type="Label" parent="."]
 anchor_left = 0.5
@@ -223,7 +211,7 @@ margin_bottom = 176.0
 mouse_filter = 1
 custom_colors/font_color = Color( 0.631373, 0.8, 0.333333, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "ПОМОЩЬ"
+text = "HELP"
 align = 1
 
 [node name="HelpText" type="Label" parent="Help"]
@@ -239,17 +227,7 @@ margin_bottom = -20.5
 custom_colors/font_color = Color( 0.662745, 0.576471, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_styles/normal = SubResource( 1 )
-text = "=== УПРАВЛЕНИЕ ===
-Ходить: A, D
-Бег: Shift
-Стрелять: Ctrl или ЛКМ
-
-Обзор: W
-Действие: S
-Лечиться: F
-
-Полный экран: Alt + Enter
-Выход: Esc"
+text = "HELP_TEXT"
 
 [node name="GameWin" type="Label" parent="."]
 visible = false

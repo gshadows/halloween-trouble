@@ -1467,9 +1467,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "A, D - ходьба
-W - обзор
-Shift - бег"
+text = "TOTOR_WASD"
 font = ExtResource( 20 )
 autowrap = true
 
@@ -1480,9 +1478,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "Призраки опасны!
-Кидай тыкву или
-пробегай мимо!"
+text = "TUTOR_GHOSTS"
 font = ExtResource( 20 )
 autowrap = true
 
@@ -1493,9 +1489,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "Призраки часто
-выходят из могил.
-Но не всегда."
+text = "TUTOR_GRAVES"
 font = ExtResource( 20 )
 autowrap = true
 
@@ -1506,9 +1500,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "В доме можно
-попросить конфет
-(клавиша S)"
+text = "TUTOR_HOMES"
 font = ExtResource( 20 )
 autowrap = true
 
@@ -1519,7 +1511,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "Удачи!"
+text = "TUTOR_GOODLUCK"
 font = ExtResource( 20 )
 autowrap = true
 
@@ -2362,9 +2354,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "Тыквы можно
-кидать в нечисть
-(Ctrl или ЛКМ)"
+text = "TUTOR_PUMPKINS"
 font = ExtResource( 20 )
 autowrap = true
 
@@ -2438,9 +2428,7 @@ generate_lightmap = false
 pixel_size = 0.002
 billboard = 2
 modulate = Color( 0.709804, 1, 0, 1 )
-text = "Конфеты можно есть
-как лекарство
-(клавиша F)"
+text = "TUTOR_CANDIES"
 font = ExtResource( 20 )
 autowrap = true
 

@@ -1,0 +1,86 @@
+keys,en,ru
+TOTOR_WASD,"A, D - walk
+W - overview
+Shift – run","A, D - ходьба
+W - обзор
+Shift - бег"
+TUTOR_PUMPKINS,"Pumpkins could be
+thrown at the evil spirits 
+(Ctrl or LMB)","Тыквы можно
+кидать в нечисть
+(Ctrl или ЛКМ)"
+TUTOR_CANDIES,"You could eat candies
+as a medicine
+(F key)","Конфеты можно есть
+как лекарство
+(клавиша F)"
+TUTOR_GHOSTS,"Ghosts are dangerous!
+Throw pumpkin
+or just run!","Призраки опасны!
+Кидай тыкву или
+пробегай мимо!"
+TUTOR_GRAVES,"Ghosts mostly come
+from the graves.
+But not always.","Призраки часто
+выходят из могил.
+Но не всегда."
+TUTOR_HOMES,"At the house you
+could ask for candies
+(S key)","В доме можно
+попросить конфет
+(клавиша S)"
+TUTOR_GOODLUCK,Good luck!,Удачи!
+START,S T A R T,С Т А Р Т
+QUIT,Q U I T,В Ы Х О Д
+MUSIC,Music,Музыка
+SOUNDS,Sounds,Звуки
+FULLSCREEN,Full screen,Полн. экран
+COPYRIGHT,COPYRIGHT,АВТОРСКИЕ ПРАВА
+HELP,HELP,ПОМОЩЬ
+DEBUG,Debug,Отладка
+COPYRIGHT_TXT,"Free FONT: (c) Ruslan Khasanov (www.ruskhasanov.com)
+https://www.behance.net/gallery/7435569/VETKA-free-font
+
+Free MUSIC from freemusicarchive.org:
+1) Tom Aldrich - Mysterious
+2) Disco Missile - Jet (live)
+
+Free SOUNDS from FreeSound.org:
+(c) yoyodaman234, inchadney, yudena, justinvoke, horroraudio, dominictreis,
+breviceps, dkiller2204, glaneur-de-sons, ryusa, evanski, amir2mi, mrickey13,
+deleted-user
+
+Voices – by me :)","Бесплатный ШРИФТ: (c) Ruslan Khasanov (www.ruskhasanov.com)
+https://www.behance.net/gallery/7435569/VETKA-free-font
+
+Бесплатная МУЗЫКА с freemusicarchive.org:
+1) Tom Aldrich - Mysterious
+2) Disco Missile - Jet (live)
+
+Бесплатные ЗВУКИ с FreeSound.org:
+(c) yoyodaman234, inchadney, yudena, justinvoke, horroraudio, dominictreis,
+breviceps, dkiller2204, glaneur-de-sons, ryusa, evanski, amir2mi, mrickey13,
+deleted-user
+
+Озвучка - моя :)"
+HELP_TEXT,"=== CONTROLS ===
+Walk: A, D
+Run: Shift
+Shoot: Ctrl or ЛКМ
+
+Overview: W
+Action: S
+Heal: F
+
+Fullscreen: Alt + Enter
+Quit: Esc","=== УПРАВЛЕНИЕ ===
+Ходить: A, D
+Бег: Shift
+Стрелять: Ctrl или ЛКМ
+
+Обзор: W
+Действие: S
+Лечиться: F
+
+Полный экран: Alt + Enter
+Выход: Esc"

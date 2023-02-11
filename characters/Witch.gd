@@ -291,7 +291,7 @@ func death():
 	emit_signal("death")
 
 
-func _on_SpiderArea_area_entered(area):
+func _on_SpiderArea_area_entered(_area):
 	var sp_area = get_parent().get_node("SpiderArea")
 	get_parent().remove_child(sp_area)
 	sp_area.queue_free()
