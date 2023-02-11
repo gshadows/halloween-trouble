@@ -1,6 +1,11 @@
 # Halloween Trouble
 PGD GameDev JAM #10: Revived Fears
 
-Download link: https://gshadow.itch.io/halloween-trouble
+Download from Itch: https://gshadow.itch.io/halloween-trouble
 
-![Gobot cover image](https://raw.githubusercontent.com/gshadows/halloween-trouble/main/docs/Cover.png)
+![Halloween Trouble cover image](docs/Cover.png)
+
+**Software used:**
+* Blender 3.x
+* Godot 3.5
+* Paint.NET
